@@ -7,7 +7,7 @@ def ConvertToGaryscale(ColoredImage):
 
     return GrayscaleImage
 
-def Convolve(Image,Gx,Gy):
+def Convolve(Image,Gx,Gy=np.zeros((3,3))):
     if len(Image.shape) == 3:
         Image = ConvertToGaryscale(Image)
     # print(len(Gx[0]))
@@ -31,9 +31,17 @@ def Convolve(Image,Gx,Gy):
                 PixelValueX=np.sum(np.multiply(Gx,PaddedImage[row:row+KernalNumberOfRows,column:column+KernalNumberOfColumns])) 
                 PixelValueY=np.sum(np.multiply(Gy,PaddedImage[row:row+KernalNumberOfRows,column:column+KernalNumberOfColumns]))
                 ResultantImage[row,column]=np.sqrt(PixelValueX**2+PixelValueY**2)
-
               
     return ResultantImage
+    
+def Threshold(image,High,Low , Weak):
+    ResultantImage = np.zeros(image.shape)
+    HighNumbersRow, HighNumbersColumn = np.where(image >= High)
+    LowNumbersRow, LowNumbersColumn = np.where((image <= High) & (image >= Low))
+    ResultantImage[HighNumbersRow, HighNumbersColumn] = 255
+    ResultantImage[LowNumbersRow, LowNumbersColumn] =Weak 
+    return ResultantImage  
+
 def GaussianFilter(Image,Sigma):
     FilterSize = 2 * int(4 * Sigma + 0.5) + 1
     GAUSSIAN_KERNEL = np.zeros((FilterSize, FilterSize))
@@ -52,8 +60,8 @@ def Gradient(image):
                            [-2,0,2],
                            [-1,0,1]])                                                 
     SobelKernalY=np.flip(SobelKernalX.transpose())
-    SobelVertical=Convolve(image,SobelKernalX,np.zeros(SobelKernalX.shape))
-    SobelHorizontal=Convolve(image,SobelKernalY,np.zeros(SobelKernalY.shape))   
+    SobelVertical=Convolve(image,SobelKernalX)
+    SobelHorizontal=Convolve(image,SobelKernalY)   
     GradientTheta = np.arctan2(SobelHorizontal,SobelVertical)
     GradientTheta=np.rad2deg(GradientTheta) # from radian to degree
     GradientTheta += 180

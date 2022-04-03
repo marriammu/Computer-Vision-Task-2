@@ -55,9 +55,7 @@ def GetPeaks(HoughAccumlator, PeaksNumber, Threshold=0,NeighborhoodSize=3):
     HoughAccumlatorCopy = np.copy(HoughAccumlator)
     for i in range(PeaksNumber):
         Index = np.argmax(HoughAccumlatorCopy)
-        print(Index)
         HoughCopyIndecies = np.unravel_index(Index, HoughAccumlatorCopy.shape)
-        print(HoughCopyIndecies)
         Indecies.append(HoughCopyIndecies)
         IndexY, IndexX = HoughCopyIndecies 
         if (IndexX - (NeighborhoodSize/2)) < 0: MinimumX = 0
