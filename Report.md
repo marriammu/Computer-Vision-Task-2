@@ -32,7 +32,11 @@ Contour Model (snake) using the greedy algorithm. Represent the output as chain 
 
 **Detecting Edges, Lines, and Circles**
 
-- //illustrate and put results here
+- In this Section we used Canny for Edge detection.
+- In  Hough Line Transform we used Edged image to get acculmator and used it to get all detected lines indecies.
+- Then we  represented all lines in the image by finite lines darwn ny cv2.lines.
+- In Hough Circle Transform we Edged image to get acculmator and used it to get all detected circle indecies.
+- Then we  represented all circles in the image by finite lines darwn ny cv2.circles.
 
 
 **Results**

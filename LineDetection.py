@@ -18,33 +18,6 @@ def HoughLinesAccumlator(Image, RhoResolution=1, ThetaResolution=1):
         HoughAccumlator[rho, index%180] += 1
     return HoughAccumlator, Rhos, Thetas
 
-def PlotHoughAcculmator(HoughAccumlator, plot_title='Hough Accumulator Plot'):
-    ''' A function that plot a Hough Space using Matplotlib. '''
-    fig = plt.figure(figsize=(10, 10))
-    fig.canvas.set_window_title(plot_title) 	
-    plt.imshow(HoughAccumlator, cmap='jet')
-    plt.xlabel('Theta Direction'), plt.ylabel('Rho Direction')
-    plt.tight_layout()
-    plt.show()
-
-
-def DrawLines(Image, Indicies, Rhos, Thetas):
-    ''' A function that takes Indicies a Rhos table and Thetas table and draws
-        lines on the input images that correspond to these values. '''
-    DetectedRhos = Rhos[np.array(list(zip(*Indicies))[0])]
-    DetectedThetas=Thetas[np.array(list(zip(*Indicies))[1])]
-    Sines=np.sin(DetectedThetas)
-    Cosines=np.cos(DetectedThetas)
-    StartXs = (Cosines*DetectedRhos + 1000*(-Sines)).astype(int)
-    EndXs = (Cosines*DetectedRhos - 1000*(-Sines)).astype(int)
-    StartYs = (Sines*DetectedRhos + 1000*(Cosines)).astype(int)
-    EndYs = (Sines*DetectedRhos - 1000*(Cosines)).astype(int)
-    EndPoints=np.array([*zip(EndXs, EndYs)])
-    StartPoints=np.array([*zip(StartXs, StartYs)])
-    for i in range(len(StartPoints)):
-        cv2.line(Image,StartPoints[i] ,EndPoints[i], (0, 255, 0), 2)
-
-
 def GetPeaks(HoughAccumlator, PeaksNumber, Threshold=0,NeighborhoodSize=3):
     ''' A function that returns the Indecies of the accumulator array HoughAccumlator that
         correspond to a local maxima.  If Threshold is active all values less
@@ -74,4 +47,31 @@ def GetPeaks(HoughAccumlator, PeaksNumber, Threshold=0,NeighborhoodSize=3):
                 if (y == MinimumY or y == (MaximumY - 1)):
                     HoughAccumlator[y, x] = 255
     return Indecies, HoughAccumlator
+    
+def PlotHoughAcculmator(HoughAccumlator, plot_title='Hough Accumulator Plot'):
+    ''' A function that plot a Hough Space using Matplotlib. '''
+    fig = plt.figure(figsize=(10, 10))
+    fig.canvas.set_window_title(plot_title) 	
+    plt.imshow(HoughAccumlator, cmap='jet')
+    plt.xlabel('Theta Direction'), plt.ylabel('Rho Direction')
+    plt.tight_layout()
+    plt.show()
+
+
+def DrawLines(Image, Indicies, Rhos, Thetas):
+    ''' A function that takes Indicies a Rhos table and Thetas table and draws
+        lines on the input images that correspond to these values. '''
+    DetectedRhos = Rhos[np.array(list(zip(*Indicies))[0])]
+    DetectedThetas=Thetas[np.array(list(zip(*Indicies))[1])]
+    Sines=np.sin(DetectedThetas)
+    Cosines=np.cos(DetectedThetas)
+    StartXs = (Cosines*DetectedRhos + 1000*(-Sines)).astype(int)
+    EndXs = (Cosines*DetectedRhos - 1000*(-Sines)).astype(int)
+    StartYs = (Sines*DetectedRhos + 1000*(Cosines)).astype(int)
+    EndYs = (Sines*DetectedRhos - 1000*(Cosines)).astype(int)
+    EndPoints=np.array([*zip(EndXs, EndYs)])
+    StartPoints=np.array([*zip(StartXs, StartYs)])
+    for i in range(len(StartPoints)):
+        cv2.line(Image,StartPoints[i] ,EndPoints[i], (0, 255, 0), 2)
+
 
