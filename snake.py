@@ -81,14 +81,7 @@ class Snake:
 
     ####### Normalization funtion to normalize the kernel of search
     def normalize (kernel):
-        # abs_sum = 0
-        # for i in kernel:
-        #     abs_sum += abs(i)
-
-        # if abs_sum !=0:
-        #     return kernel/abs_sum
-        # else:
-        #     return kernel
+        
         abs_sum = np.sum( [ abs( x ) for x in kernel ] )
         return kernel / abs_sum if abs_sum != 0 else kernel
         
