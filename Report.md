@@ -67,11 +67,20 @@ The snake model is a technique that has the ability to solve a broad range of se
 
 **Results**
 
-- //put results here
+- Image_1
 
 <img src="images/snake1.png" alt="snake1 Image" width="600" height="300"/>
 
 
+-Image_2
+
 <img src="images/snake2.png" alt="snake2 Image" width="600" height="300"/>
 
+- Image_3
 
+<img src="images/snake3.png" alt="snake3 Image" width="600" height="300"/>
+
+
+-Image_4
+
+<img src="images/snake4.png" alt="snake4 Image" width="600" height="300"/>

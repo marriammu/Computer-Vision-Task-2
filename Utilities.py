@@ -1,5 +1,5 @@
 import numpy as np
-            
+
 def ConvertToGaryscale(ColoredImage):
     
     Red, Green, Blue = ColoredImage[:,:,0], ColoredImage[:,:,1], ColoredImage[:,:,2]
@@ -197,4 +197,10 @@ def local_thresh(input_img,T):
                 out_img[row,col] = 255
     ##the result
     return out_img
+
+
+
+
+        
+
 
