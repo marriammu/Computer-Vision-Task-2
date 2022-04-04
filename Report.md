@@ -49,19 +49,21 @@ Contour Model (snake) using the greedy algorithm. Represent the output as chain 
 
 **Active Contour (Snakes)**
 
-- The active contour model, or snake, is defined as an energy minimizing spline.
-- The snake's energy depends on its shape and location within the image.
-- Snakes may be understood as a special case of a more general technique of matching a deformable model to an image by means of energy minimization.
-- It must must specify an approximate shape and starting position for the snake somewhere near the desired contour.
+**Active Contour**: Active contour is defined as an active model for the segmentation process. Contours are the boundaries that define the region of interest in an image. A contour is a collection of points that have been interpolated. The interpolation procedure might be linear, splines, or polynomial, depending on how the curve in the image is described. Here we use **spline**
+
+1. Snake Model
+The snake model is a technique that has the ability to solve a broad range of segmentation problems. The model’s primary function is to identify and outline the target object for segmentation. It requires some prior knowledge of the target object’s shape, especially for complicated things. Active snake models, often known as snakes, are generally configured by the use of spline focused on minimizing energy, followed by various forces governing the image.
+
+**Note** you must must specify an approximate shape and starting position for the snake somewhere near the desired contour.
 
 
 **Greedy Algorithm**
 
+- The greedy approach is an energy-minimizing algorithm in-troduced for 2D contours. Global mini-mization is done by means of successive local optimization.
+
 - The greedy method is an implementation technique used to simplify the implementation of the minimization of energy without having to perform an optimization algorithm technique such as the gradient descent. It works under the assumption that finding for each point of the contour the closest local energy minimizing neighbor will converge to the overall global minimum of the contour.
 
-<img src="images/equation.png" alt="Equation" width="600" height="200"/>
-
-*Note*: The set-up of the α, β and gamma coefficient does play an important role in the shape of the contour.
+<img src="images/equation.png" alt="Equation" width="800" height="150"/>
 
 **Results**
 
